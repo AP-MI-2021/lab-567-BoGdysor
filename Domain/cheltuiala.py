@@ -61,3 +61,9 @@ def get_id(cheltuiala):
     :return:
     """
     return cheltuiala['id_apartament']
+
+
+def get_str(cheltuiala):
+    return "Apartamentul cu id-ul {0},cu numarul de apartament {1},are de platit suma {2},la data de {3}, avand tipul {4}".format(
+        get_id(cheltuiala), get_nr_apartament(cheltuiala), get_suma(cheltuiala), get_data(cheltuiala),
+        get_tip(cheltuiala))
