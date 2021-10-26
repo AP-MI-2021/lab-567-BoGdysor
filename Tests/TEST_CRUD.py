@@ -45,6 +45,10 @@ def test_delete():
     assert len(deleted) == len(cheltuieli) - 1
 
 
-test_delete()
-test_create()
-test_update()
+def test_crud():
+    test_create()
+    test_read()
+    test_update()
+    test_delete()
+
+test_crud()
