@@ -18,6 +18,15 @@ def creeaza_cheltuiala(id_cheltuiala: int, nr_apartament, suma, data, tip):
     ]
 
 
+def get_id(cheltuiala):
+    """
+    Getter pentru id-ul cheltuielii
+    :param cheltuiala: O cheltuiala
+    :return:Id-ul cheltuielii
+    """
+    return cheltuiala[0]
+
+
 def get_nr_apartament(cheltuiala):
     """
     Getter penrtu numarul apartamentului
@@ -52,15 +61,6 @@ def get_tip(cheltuiala):
     :return:Tip-ul cheltuielii
     """
     return cheltuiala[4]
-
-
-def get_id(cheltuiala):
-    """
-    Getter pentru id-ul cheltuielii
-    :param cheltuiala: O cheltuiala
-    :return:Id-ul cheltuielii
-    """
-    return cheltuiala[0]
 
 
 def get_str(cheltuiala):
