@@ -8,43 +8,40 @@ def show_menu():
 
 
 def handle_add(cheltuieli):
-    id_apartament = int(input('Dati id-ul apartamentului: '))
+    id_cheltuiala = int(input('Dati id-ul cheltuielii: '))
     ok = 0
     for cheltuiala in cheltuieli:
-        if get_id(cheltuiala) == id_apartament:
+        if get_id(cheltuiala) == id_cheltuiala:
             ok = ok + 1
-    if ok == len(cheltuieli):
-        print("Apartament cu acest id deja exista")
+    if ok:
+        print("Cheltuiala cu acest id deja exista")
     else:
         nr_apartament = int(input('Dati numarul apartamentului: '))
         suma = float(input('Dati suma cheltuielii: '))
         data = input('Introduceti data in formatul DD/MM/YYYY: ')
         tip = input('Introduceti tip-ul cheltuielii ')
-        return create(cheltuieli, id_apartament, nr_apartament, suma, data, tip)
+        return create(cheltuieli, id_cheltuiala, nr_apartament, suma, data, tip)
 
 
 def handle_update(cheltuieli):
-    id_apartament = int(input("Dati id-ul apartamentului ce ii trebuie modificata cheltuiala: "))
+    id_cheltuiala = int(input("Dati id-ul cheltuielii ce ii trebuie modificata cheltuiala: "))
     # daca l ai pus inainte nu face figuri ,iar daca l ai pus face
+
     nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
     suma = float(input('Dati noua suma: '))
     data = input("Introduceti data in formatul DD/MM/YYYY: ")
     tip = input('Dati noul tip: ')
-    return update(cheltuieli, creeaza_cheltuiala(id_apartament, nr_apartament, suma, data, tip))
+    return update(cheltuieli, creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip))
 
 
 def handle_delete(cheltuieli):
-    id_apartament = int(input('Dati id-ul apartamentului pentru stergere: '))
-    ok = 0
-    for cheltuiala in cheltuieli:
-        if get_id(cheltuiala) != id_apartament:
-            ok = ok + 1
-    if ok == len(cheltuieli):
-        print("Nu exista acest id")
+    id_cheltuieli = int(input('Dati id-ul cheltuielii pentru stergere: '))
+    new_cheltuieli = delete(cheltuieli, id_cheltuieli)
+    if len(new_cheltuieli) == len(cheltuieli):
+        print("Stergerea nu s-a efectual")
     else:
-        cheltuieli = delete(cheltuieli, id_apartament)
-        print('S-a efectuat stergerea')
-        return cheltuieli
+        print("Stergerea s-a efectual cu succes")
+        return new_cheltuieli
 
 
 def handle_show_all(cheltuieli):
