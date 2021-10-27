@@ -50,15 +50,15 @@ def handle_show_all(cheltuieli):
 
 
 def handle_show_details(cheltuieli):
-    id_apartament = int(input('Dati id-ul apartamentului pentru detalii: '))
+    id_cheltuieli = int(input('Dati id-ul cheltuielii pentru detalii: '))
     ok = 0
     for chelt in cheltuieli:
-        if get_id(chelt) != id_apartament:
+        if get_id(chelt) != id_cheltuieli:
             ok = ok + 1
     if ok == len(cheltuieli):
         print("Nu este niciun apartament cu acest id")
     else:
-        cheltuiala = read(cheltuieli, id_apartament)
+        cheltuiala = read(cheltuieli, id_cheltuieli)
         print('Numarul apartamentului este: {}'.format(get_nr_apartament(cheltuiala)))
         print('Suma ce trebuie cheltuita este: {}'.format(get_suma(cheltuiala)))
         print('Data la care s-au generat costurile: {}'.format(get_data(cheltuiala)))
