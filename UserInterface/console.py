@@ -18,26 +18,19 @@ def handle_add(cheltuieli):
     else:
         nr_apartament = int(input('Dati numarul apartamentului: '))
         suma = float(input('Dati suma cheltuielii: '))
-        data = input('Introduceti data: ')
+        data = input('Introduceti data in formatul DD/MM/YYYY: ')
         tip = input('Introduceti tip-ul cheltuielii ')
         return create(cheltuieli, id_apartament, nr_apartament, suma, data, tip)
 
 
 def handle_update(cheltuieli):
     id_apartament = int(input("Dati id-ul apartamentului ce ii trebuie modificata cheltuiala: "))
-    ok = 0
     # daca l ai pus inainte nu face figuri ,iar daca l ai pus face
-    for cheltuiala in cheltuieli:
-        if get_id(cheltuiala) != id_apartament:
-            ok = ok + 1
-    if ok == len(cheltuieli):
-        print("Nu este niciun apartament cu acest id")
-    else:
-        nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
-        suma = float(input('Dati noua suma: '))
-        data = input("Introduceti data in formatul DD/MM/YYYY: ")
-        tip = input('Dati noul tip: ')
-        return update(cheltuieli, creeaza_cheltuiala(id_apartament, nr_apartament, suma, data, tip))
+    nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
+    suma = float(input('Dati noua suma: '))
+    data = input("Introduceti data in formatul DD/MM/YYYY: ")
+    tip = input('Dati noul tip: ')
+    return update(cheltuieli, creeaza_cheltuiala(id_apartament, nr_apartament, suma, data, tip))
 
 
 def handle_delete(cheltuieli):
