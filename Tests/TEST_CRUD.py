@@ -17,6 +17,13 @@ def test_create():
     new_cheltuieli = create(cheltuieli, *params)
     assert new_c in new_cheltuieli
     assert len(new_cheltuieli) == len(cheltuieli) + 1
+    params_2 = (16, 891, 1001, "24/10/2021", "intretinere")
+    #testam daca
+    try:
+        some_chelt = create(new_cheltuieli,*params_2)
+        assert False
+    except ValueError:
+        assert True
 
 
 def test_read():
@@ -33,7 +40,6 @@ def test_update():
     chelt_1 = cheltuieli[1]
     assert read(cheltuieli, get_id(chelt_1)) == chelt_1
     assert read(cheltuieli, None) == cheltuieli
-
 
 def test_delete():
     cheltuieli = get_data()

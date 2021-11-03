@@ -12,7 +12,11 @@ def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip):
     :param tip: tip-ul cheltuielii
     :return: cheltuiala adaugata la lst_chetluieli
     """
+
+    if read(lst_cheltuieli, id_cheltuiala) is not None:
+        raise ValueError("Deja exista o cheltuiala cu id-ul {0}".format(id_cheltuiala))
     cheltuiala = creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip)
+
     # lst_cheltuieli.append(cheltuiala)
     return lst_cheltuieli + [cheltuiala]
 
@@ -25,12 +29,16 @@ def read(lst_cheltuieli, id_cheltuiala: int = None):
     :return:cheltuiala_cu_id daca aceasta exista in lista, lst_cheltuieli in caz contrar
     """
     cheltuiala_cu_id = None
+
+    if not id_cheltuiala:
+        return lst_cheltuieli
     for cheltuiala in lst_cheltuieli:
         if get_id(cheltuiala) == id_cheltuiala:
             cheltuiala_cu_id = cheltuiala
     if cheltuiala_cu_id:
         return cheltuiala_cu_id
-    return lst_cheltuieli
+    else:
+        return None
 
 
 def update(lst_cheltuieli, new_cheltuiela):
@@ -41,6 +49,10 @@ def update(lst_cheltuieli, new_cheltuiela):
     :return:new_cheltuieli - noua lista cu cheltuieli dupa modificarea cheltuielii
     """
     new_cheltuieli = []
+
+    if read(lst_cheltuieli, get_id(new_cheltuiela)) is None:
+        raise ValueError("Nu exista o cheltuiala cu id-ul {0} pe care o sa o actualizam".format(get_id(new_cheltuiela)))
+
     for cheltuiela in lst_cheltuieli:
         if get_id(cheltuiela) != get_id(new_cheltuiela):
             new_cheltuieli.append(cheltuiela)
@@ -56,6 +68,8 @@ def delete(lst_cheltuieli, id_cheltuiei):
     :param id_cheltuiei: cheltuiala pe care vrem sa o stergem
     :return: new_cheltuieli - boua lista cu cheltuieli dupa stergerea cheltuielii alese
     """
+    if read(lst_cheltuieli, id_cheltuiei) is None:
+        raise ValueError("Nu exista o cheltuiala cu id-ul {0} pe care o sa o stergem".format(id_cheltuiei))
     new_cheltuieli = []
     for cheltuieli in lst_cheltuieli:
         if get_id(cheltuieli) != id_cheltuiei:

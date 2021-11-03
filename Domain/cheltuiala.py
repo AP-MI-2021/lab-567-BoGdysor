@@ -69,6 +69,6 @@ def get_str(cheltuiala):
     :param cheltuiala: O cheltuiala
     :return:Mesajul cu detaliile cheltuielii
     """
-    return "Cheltuiala cu id-ul {0},cu numarul de apartament {1},are de platit suma {2},in data de {3}, avand tipul {4}".format(
+    return "Cheltuiala cu id-ul {0},cu numarul de apartament {1},are de platit suma {2},in data de {3}, avand tipul: {4}".format(
         get_id(cheltuiala), get_nr_apartament(cheltuiala), get_suma(cheltuiala), get_data(cheltuiala),
         get_tip(cheltuiala))

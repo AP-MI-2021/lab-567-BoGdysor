@@ -1,47 +1,53 @@
 from Domain.cheltuiala import get_suma, get_data, get_tip, get_nr_apartament, get_str, creeaza_cheltuiala, get_id
 from Logic.CRUD import create, update, read, delete
+from Logic.Cel_mai_mare_tip import cea_mai_mare_cheltuiala_tip
+from Logic.adunare_cheltuieli import adunare_cheltuieli
+from Logic.ordonarea_cheltuielilor import ord_chelt_dupa_suma_desc
 
 
 def show_menu():
     print('1.CRUD')
+    print('2.Adunarea unei valori la cheltuielile dintr-o anumita data')
+    print('4.Determinarea celei mai mari cheltuieli pentru fiecare tip de cheltuială')
+    print('5.Ordonarea cheltuielilor descrescător după sumă')
     print('x.Exit')
 
 
 def handle_add(cheltuieli):
-    id_cheltuiala = int(input('Dati id-ul cheltuielii: '))
-    ok = 0
-    for cheltuiala in cheltuieli:
-        if get_id(cheltuiala) == id_cheltuiala:
-            ok = ok + 1
-    if ok:
-        print("Cheltuiala cu acest id deja exista")
-    else:
+    try:
+        id_cheltuiala = int(input('Dati id-ul cheltuielii: '))
         nr_apartament = int(input('Dati numarul apartamentului: '))
         suma = float(input('Dati suma cheltuielii: '))
         data = input('Introduceti data in formatul DD/MM/YYYY: ')
         tip = input('Introduceti tip-ul cheltuielii ')
         return create(cheltuieli, id_cheltuiala, nr_apartament, suma, data, tip)
+    except ValueError as va:
+        print('Error: ', va)
+    return cheltuieli
 
 
 def handle_update(cheltuieli):
-    id_cheltuiala = int(input("Dati id-ul cheltuielii ce ii trebuie modificata cheltuiala: "))
-    # daca l ai pus inainte nu face figuri ,iar daca l ai pus face
-
-    nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
-    suma = float(input('Dati noua suma: '))
-    data = input("Introduceti data in formatul DD/MM/YYYY: ")
-    tip = input('Dati noul tip: ')
-    return update(cheltuieli, creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip))
+    try:
+        id_cheltuiala = int(input("Dati id-ul cheltuielii ce ii trebuie modificata cheltuiala: "))
+        nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
+        suma = float(input('Dati noua suma: '))
+        data = input("Introduceti data in formatul DD/MM/YYYY: ")
+        tip = input('Dati noul tip: ')
+        return update(cheltuieli, creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip))
+    except ValueError as va:
+        print('Error: ', va)
+    return cheltuieli
 
 
 def handle_delete(cheltuieli):
-    id_cheltuieli = int(input('Dati id-ul cheltuielii pentru stergere: '))
-    new_cheltuieli = delete(cheltuieli, id_cheltuieli)
-    if len(new_cheltuieli) == len(cheltuieli):
-        print("Stergerea nu s-a efectual")
-    else:
+    try:
+        id_cheltuieli = int(input('Dati id-ul cheltuielii pentru stergere: '))
+        new_cheltuieli = delete(cheltuieli, id_cheltuieli)
         print("Stergerea s-a efectual cu succes")
         return new_cheltuieli
+    except ValueError as va:
+        print('Error:', va)
+    return cheltuieli
 
 
 def handle_show_all(cheltuieli):
@@ -92,12 +98,52 @@ def handle_crud(cheltuieli):
     return cheltuieli
 
 
+def handle_adaugare(cheltuieli):
+    valoare = float(input("Introduceti valoarea pe care vreti sa o adaugati la cheltuieli"))
+    data = input("introduceti data la care sa se adauge valoarea")
+    cheltuieli = adunare_cheltuieli(cheltuieli, valoare, data)
+    return cheltuieli
+
+
+def handle_tip(cheltuieli):
+    while True:
+        print('1.Cea mai mare suma de tip-ul  "intretinere": ')
+        print('1.Cea mai mare suma de tip-ul  "canal": ')
+        print('1.Cea mai mare suma de tip-ul  "alte cheltuieli" :')
+        optiune = input("Optiunea aleasa: ")
+        if optiune == '1':
+            tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "intretinere")
+            print(tip)
+        elif optiune == '2':
+            tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "canal")
+            print(tip)
+        elif optiune == '3':
+            tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "alte cheltuieli")
+            print(tip)
+        elif optiune == 'b':
+            break
+        else:
+            print("Optiune invalida")
+    return cheltuieli
+
+
+def handle_ordo(cheltuieli):
+    new_list = ord_chelt_dupa_suma_desc(cheltuieli)
+    print(new_list)
+
+
 def run_ui(cheltuieli):
     while True:
         show_menu()
         optiune = input('Optiunea aleasa: ')
         if optiune == '1':
             cheltuieli = handle_crud(cheltuieli)
+        if optiune == '2':
+            cheltuieli = handle_adaugare(cheltuieli)
+        elif optiune == '4':
+            cheltuieli = handle_tip(cheltuieli)
+        elif optiune == '5':
+            cheltuieli = handle_ordo(cheltuieli)
         elif optiune == 'x':
             break
         else:
