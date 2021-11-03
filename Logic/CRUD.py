@@ -13,6 +13,8 @@ def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip):
     :return: cheltuiala adaugata la lst_chetluieli
     """
 
+    if tip != "intretinere" and tip != "canal" and tip != "alte cheltuieli":
+        raise ValueError("Acest tip de cheltuiala este invalid!")
     if read(lst_cheltuieli, id_cheltuiala) is not None:
         raise ValueError("Deja exista o cheltuiala cu id-ul {0}".format(id_cheltuiala))
     cheltuiala = creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip)
