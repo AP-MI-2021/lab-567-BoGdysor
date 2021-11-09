@@ -3,7 +3,8 @@ import datetime
 from Domain.cheltuiala import creeaza_cheltuiala, get_id
 
 
-def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip):
+def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip, undo_lst: list,
+           redo_lst: list):
     """
     Creaza o cheltuiala
     :param lst_cheltuieli:lista cu cheltuielile deja existente
@@ -12,6 +13,8 @@ def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip):
     :param suma: suma cheltuielii
     :param data: data cheltuielii
     :param tip: tip-ul cheltuielii
+    :param redo_lst:
+    :param undo_lst:
     :return: cheltuiala adaugata la lst_chetluieli
     """
     if read(lst_cheltuieli, id_cheltuiala) is not None:
@@ -24,6 +27,8 @@ def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip):
 
     cheltuiala = creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip)
     # lst_cheltuieli.append(cheltuiala)
+    undo_lst.append(lst_cheltuieli)
+    redo_lst.clear()
     return lst_cheltuieli + [cheltuiala]
 
 
@@ -47,7 +52,7 @@ def read(lst_cheltuieli, id_cheltuiala: int = None):
         return None
 
 
-def update(lst_cheltuieli, new_cheltuiela):
+def update(lst_cheltuieli, new_cheltuiela, undo_list: list, redo_list: list):
     """
     Updateaza o cheltuiala din lista de cheltuieli
     :param lst_cheltuieli: lista de cheltuieli existente
@@ -64,10 +69,12 @@ def update(lst_cheltuieli, new_cheltuiela):
             new_cheltuieli.append(cheltuiela)
         else:
             new_cheltuieli.append(new_cheltuiela)
+    undo_list.append(lst_cheltuieli)
+    redo_list.clear()
     return new_cheltuieli
 
 
-def delete(lst_cheltuieli, id_cheltuiei):
+def delete(lst_cheltuieli, id_cheltuiei, undo_list: list, redo_list: list):
     """
     Stergerea unei cheltuieli
     :param lst_cheltuieli: lista cu cheltuielile existente
@@ -80,4 +87,6 @@ def delete(lst_cheltuieli, id_cheltuiei):
     for cheltuieli in lst_cheltuieli:
         if get_id(cheltuieli) != id_cheltuiei:
             new_cheltuieli.append(cheltuieli)
+    undo_list.append(lst_cheltuieli)
+    redo_list.clear()
     return new_cheltuieli

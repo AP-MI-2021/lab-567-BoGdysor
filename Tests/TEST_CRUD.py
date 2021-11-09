@@ -14,13 +14,13 @@ def test_create():
     cheltuieli = get_data()
     params = (16, 991, 1001, "24-10-2021", "intretinere")
     new_c = creeaza_cheltuiala(*params)
-    new_cheltuieli = create(cheltuieli, *params)
+    new_cheltuieli = create(cheltuieli, 16, 991, 1001, "24-10-2021", "intretinere", [], [])
     assert new_c in new_cheltuieli
     assert len(new_cheltuieli) == len(cheltuieli) + 1
     params_2 = (16, 891, 1001, "24-10-2021", "intretinere")
-    #testam daca
+    # testam daca
     try:
-        some_chelt = create(new_cheltuieli,*params_2)
+        some_chelt = create(new_cheltuieli, 16, 891, 1001, "24-10-2021", "intretinere", [], [])
         assert False
     except ValueError:
         assert True
@@ -30,7 +30,7 @@ def test_read():
     cheltuieli = get_data()
     params = (15, 991, 1001, "24-10-2021", "intretinere")
     cheltuiala_noua = creeaza_cheltuiala(*params)
-    new_cheltuieli = create(cheltuieli, *params)
+    new_cheltuieli = create(cheltuieli, 15, 991, 1001, "24-10-2021", "intretinere", [], [])
     assert len(new_cheltuieli) == len(cheltuieli) + 1
     assert cheltuiala_noua in new_cheltuieli
 
@@ -41,11 +41,12 @@ def test_update():
     assert read(cheltuieli, get_id(chelt_1)) == chelt_1
     assert read(cheltuieli, None) == cheltuieli
 
+
 def test_delete():
     cheltuieli = get_data()
     to_delete = 12
     c_deleted = read(cheltuieli, to_delete)
-    deleted = delete(cheltuieli, to_delete)
+    deleted = delete(cheltuieli, to_delete, [], [])
     assert c_deleted not in deleted
     assert c_deleted in cheltuieli
     assert len(deleted) == len(cheltuieli) - 1
@@ -56,5 +57,3 @@ def test_crud():
     test_read()
     test_update()
     test_delete()
-
-test_crud()

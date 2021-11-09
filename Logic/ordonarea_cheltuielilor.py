@@ -5,6 +5,6 @@ def suma(cheltuieli):
     return get_suma(cheltuieli)
 
 
-def ord_chelt_dupa_suma_desc(lst_cheltuieli):
-    new_list = sorted(lst_cheltuieli, key=suma, reverse=True)
+def ord_chelt_dupa_suma_desc(lst_cheltuieli,):
+    new_list = sorted(lst_cheltuieli, key=suma, reverse=False)
     return new_list
