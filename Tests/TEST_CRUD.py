@@ -4,20 +4,20 @@ from Logic.CRUD import create, read, delete
 
 def get_data():
     return [
-        creeaza_cheltuiala(12, 69, 6969, "20/10/2021", "canal"),
-        creeaza_cheltuiala(13, 191, 100, "21/10/2021", "alte cheltuieli"),
-        creeaza_cheltuiala(14, 121, 1001, "23/10/2021", "intretinere")
+        creeaza_cheltuiala(12, 69, 6969, "20-10-2021", "canal"),
+        creeaza_cheltuiala(13, 191, 100, "21-10-2021", "alte cheltuieli"),
+        creeaza_cheltuiala(14, 121, 1001, "23-10-2021", "intretinere")
     ]
 
 
 def test_create():
     cheltuieli = get_data()
-    params = (16, 991, 1001, "24/10/2021", "intretinere")
+    params = (16, 991, 1001, "24-10-2021", "intretinere")
     new_c = creeaza_cheltuiala(*params)
     new_cheltuieli = create(cheltuieli, *params)
     assert new_c in new_cheltuieli
     assert len(new_cheltuieli) == len(cheltuieli) + 1
-    params_2 = (16, 891, 1001, "24/10/2021", "intretinere")
+    params_2 = (16, 891, 1001, "24-10-2021", "intretinere")
     #testam daca
     try:
         some_chelt = create(new_cheltuieli,*params_2)
@@ -28,7 +28,7 @@ def test_create():
 
 def test_read():
     cheltuieli = get_data()
-    params = (15, 991, 1001, "24/10/2021", "intretinere")
+    params = (15, 991, 1001, "24-10-2021", "intretinere")
     cheltuiala_noua = creeaza_cheltuiala(*params)
     new_cheltuieli = create(cheltuieli, *params)
     assert len(new_cheltuieli) == len(cheltuieli) + 1

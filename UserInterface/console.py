@@ -3,6 +3,7 @@ from Logic.CRUD import create, update, read, delete
 from Logic.Cel_mai_mare_tip import cea_mai_mare_cheltuiala_tip
 from Logic.adunare_cheltuieli import adunare_cheltuieli
 from Logic.ordonarea_cheltuielilor import ord_chelt_dupa_suma_desc
+from Logic.suma_lunara import suma_lunara
 
 
 def show_menu():
@@ -10,6 +11,7 @@ def show_menu():
     print('2.Adunarea unei valori la cheltuielile dintr-o anumita data')
     print('4.Determinarea celei mai mari cheltuieli pentru fiecare tip de cheltuială')
     print('5.Ordonarea cheltuielilor descrescător după sumă')
+    print('6.Suma pe luna')
     print('x.Exit')
 
 
@@ -31,7 +33,7 @@ def handle_update(cheltuieli):
         id_cheltuiala = int(input("Dati id-ul cheltuielii ce ii trebuie modificata cheltuiala: "))
         nr_apartament = int(input('Dati noul numarul  a apartamentului: '))
         suma = float(input('Dati noua suma: '))
-        data = input("Introduceti data in formatul DD/MM/YYYY: ")
+        data = input("Introduceti data in formatul DD-MM-YYYY: ")
         tip = input('Dati noul tip: ')
         return update(cheltuieli, creeaza_cheltuiala(id_cheltuiala, nr_apartament, suma, data, tip))
     except ValueError as va:
@@ -131,7 +133,10 @@ def handle_ordo(cheltuieli):
     new_list = ord_chelt_dupa_suma_desc(cheltuieli)
     print(new_list)
 
-
+def handle_suma_luni(cheltuieli):
+    lst = suma_lunara(cheltuieli)
+    for luna in lst:
+        print(f"In luna a {luna} sumele cheltuielilor sunt: {lst[luna]}")
 def run_ui(cheltuieli):
     while True:
         show_menu()
@@ -144,6 +149,8 @@ def run_ui(cheltuieli):
             cheltuieli = handle_tip(cheltuieli)
         elif optiune == '5':
             cheltuieli = handle_ordo(cheltuieli)
+        elif optiune == '6':
+             handle_suma_luni(cheltuieli)
         elif optiune == 'x':
             break
         else:
