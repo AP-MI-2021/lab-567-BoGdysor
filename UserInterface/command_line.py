@@ -9,10 +9,15 @@ def handle_add(lst_cheltuieli, param):
     :param param: o lista ce contine parametrii cheltuielii
     :return: lista de cheltuieli cu cheltuiala adaugata, in caz contrar returneaza lista de cheltuieli
     """
-    if len(param) != 6:
-        raise ValueError("Nu ati introdus numarul exact de parametrii")
     try:
-        return create(lst_cheltuieli, int(param[1]), param[2], param[3], param[4], param[5], [], [])
+        if len(param) != 6:
+            raise ValueError("Numar invalid de parametrii")
+        id_carte = int(param[1])
+        nr_apartament = param[2]
+        suma = param[3]
+        data = param[4]
+        tip = param[5]
+        return create(lst_cheltuieli, id_carte, nr_apartament, suma, data, tip, [], [])
     except ValueError as ve:
         print("Error", ve)
     return lst_cheltuieli
@@ -51,19 +56,21 @@ def show_menu():
 
 def command_line(cheltuieli):
     show_menu()
-
     while True:
-        command = input("Introduceti comanda:")
-        comenzi = command.split(";")
-        for comanda in comenzi:
-            param = command.split()
-            if comanda == 'show_all':
+
+        command = input("Introduceri comanda dorita(se pot adauga mai multe prin separatorul ',' : ")
+        commands = command.split(",")
+        for command in commands:
+
+            lst = command.split()
+
+            if lst[0] == "add":
+                cheltuieli = handle_add(cheltuieli, lst)
+            elif lst[0] == "show_all":
                 handle_show_all(cheltuieli)
-            elif param[0] == 'add':
-                cheltuieli = handle_add(cheltuieli, param)
-            elif param[0] == 'delete':
-                cheltuieli = handle_delete(cheltuieli, param)
-            elif param[0] == 'Exit':
+            elif lst[0] == "delete":
+                cheltuieli = handle_delete(cheltuieli, lst)
+            elif lst[0] == "Exit":
                 return 0
             else:
-                print("Optiune invalida")
+                print("Comanda invalida!")

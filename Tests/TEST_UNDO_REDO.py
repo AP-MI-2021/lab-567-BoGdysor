@@ -21,7 +21,7 @@ def test_undo_redo():
     new_lst_cheltuieli = do_undo(undo_list, redo_list, new_lst_cheltuieli)
     assert new_lst_cheltuieli == lst_cheltuieli
     new_lst_cheltuieli = do_undo(undo_list, redo_list, new_lst_cheltuieli)  # undo_list = None => nu se intampla nimic
-    assert new_lst_cheltuieli == None
+    assert new_lst_cheltuieli == lst_cheltuieli
     new_lst_cheltuieli = do_redo(undo_list, redo_list, new_lst_cheltuieli)
     assert len(new_lst_cheltuieli) == len(lst_cheltuieli) + 1
     new_lst_cheltuieli = do_undo(undo_list, redo_list, new_lst_cheltuieli)

@@ -5,6 +5,7 @@ from Tests.TEST_CRUD import test_crud
 from Tests.TEST_STERGERE_APARTAMENT import test_stergere_apartament
 from Tests.TEST_SUMA_LUNI import test_suma_luni
 from Tests.TEST_UNDO_REDO import test_undo_redo
+from Tests.TEST_UNDO_REDO_LAB_7 import test_undo_redo_lab_7
 
 
 def full_tests():
@@ -15,3 +16,4 @@ def full_tests():
     test_suma_luni()
     test_undo_redo()
     test_stergere_apartament()
+    test_undo_redo_lab_7()

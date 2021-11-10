@@ -1,5 +1,6 @@
 from Logic.CRUD import create
 from Tests.FULL_TESTS import full_tests
+from UserInterface.command_line import command_line
 from UserInterface.console import run_ui
 
 
@@ -13,7 +14,7 @@ def main():
     cheltuieli = create(cheltuieli, 15, 90, 420, "13-09-2021", "canal", undo_list, redo_list)
     cheltuieli = create(cheltuieli, 16, 70, 220, "14-09-2021", "alte cheltuieli", undo_list, redo_list)
     cheltuieli = create(cheltuieli, 17, 80, 250, "15-09-2021", "intretinere", undo_list, redo_list)
-    run_ui(cheltuieli, undo_list, redo_list)
+    command_line(cheltuieli)
 
 
 if __name__ == '__main__':
