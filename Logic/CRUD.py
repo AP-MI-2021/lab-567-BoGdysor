@@ -13,8 +13,8 @@ def create(lst_cheltuieli, id_cheltuiala: int, nr_apartament, suma, data, tip, u
     :param suma: suma cheltuielii
     :param data: data cheltuielii
     :param tip: tip-ul cheltuielii
-    :param redo_lst:
-    :param undo_lst:
+    :param undo_lst:lista de undo
+    :param redo_lst: lista de redo
     :return: cheltuiala adaugata la lst_chetluieli
     """
     if read(lst_cheltuieli, id_cheltuiala) is not None:
@@ -57,6 +57,8 @@ def update(lst_cheltuieli, new_cheltuiela, undo_list: list, redo_list: list):
     Updateaza o cheltuiala din lista de cheltuieli
     :param lst_cheltuieli: lista de cheltuieli existente
     :param new_cheltuiela: cheltuiala pe care vrem sa o modficam
+    :param undo_list: lista de undo
+    :param redo_list: lista de redo
     :return:new_cheltuieli - noua lista cu cheltuieli dupa modificarea cheltuielii
     """
     new_cheltuieli = []
@@ -79,6 +81,8 @@ def delete(lst_cheltuieli, id_cheltuiei, undo_list: list, redo_list: list):
     Stergerea unei cheltuieli
     :param lst_cheltuieli: lista cu cheltuielile existente
     :param id_cheltuiei: cheltuiala pe care vrem sa o stergem
+    :param undo_list: lista de undo
+    :param redo_list: lista de redo
     :return: new_cheltuieli - boua lista cu cheltuieli dupa stergerea cheltuielii alese
     """
     if read(lst_cheltuieli, id_cheltuiei) is None:

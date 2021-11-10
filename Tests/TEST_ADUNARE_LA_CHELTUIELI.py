@@ -6,12 +6,12 @@ def get_data():
     return [
         creeaza_cheltuiala(12, 69, 6969, "20-10-2021", "canal"),
         creeaza_cheltuiala(13, 191, 100, "21-10-2021", "alte cheltuieli"),
-        creeaza_cheltuiala(14, 121, 1001, "10-20-2021", "intretinere")
+        creeaza_cheltuiala(14, 121, 1001, "11-10-2021", "intretinere")
     ]
 
 
 def test_adunare_cheltuieli():
-    data = "10-20-2021"
+    data = "11-10-2021"
     cheltuieli = get_data()
     cheltuieli_new = []
     cheltuieli_new = adunare_cheltuieli(cheltuieli, 100, data, [], [])

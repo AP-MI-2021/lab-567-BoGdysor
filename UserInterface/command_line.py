@@ -12,8 +12,7 @@ def handle_add(lst_cheltuieli, param):
     if len(param) != 6:
         raise ValueError("Nu ati introdus numarul exact de parametrii")
     try:
-        print(param[1])
-        return create(lst_cheltuieli, int(param[1]), param[2], param[3], param[4], param[5])
+        return create(lst_cheltuieli, int(param[1]), param[2], param[3], param[4], param[5], [], [])
     except ValueError as ve:
         print("Error", ve)
     return lst_cheltuieli
@@ -29,7 +28,7 @@ def handle_delete(lst_cheltuieli, param):
     if len(param) != 2:
         raise ValueError("Nu ati introdus numarul exact de parametrii")
     try:
-        new_cheltuieli = delete(lst_cheltuieli, int(param[1]))
+        new_cheltuieli = delete(lst_cheltuieli, int(param[1]), [], [])
         print("Stergerea s-a efectual cu succes")
         return new_cheltuieli
     except ValueError as va:

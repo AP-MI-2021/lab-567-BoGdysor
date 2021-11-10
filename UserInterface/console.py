@@ -4,12 +4,14 @@ from Logic.Cel_mai_mare_tip import cea_mai_mare_cheltuiala_tip
 from Logic.Undo_Redo import do_undo, do_redo
 from Logic.adunare_cheltuieli import adunare_cheltuieli
 from Logic.ordonarea_cheltuielilor import ord_chelt_dupa_suma_desc
+from Logic.stergere_apartament import stergere_nr_aprtament
 from Logic.suma_lunara import suma_lunara
 
 
 def show_menu():
     print('1.CRUD')
-    print('2.Adunarea unei valori la cheltuielile dintr-o anumita data')
+    print('2.Ștergerea tuturor cheltuielilor pentru un apartament dat.')
+    print('3.Adunarea unei valori la cheltuielile dintr-o anumita data')
     print('4.Determinarea celei mai mari cheltuieli pentru fiecare tip de cheltuială')
     print('5.Ordonarea cheltuielilor descrescător după sumă')
     print('6.Suma pe luna')
@@ -104,28 +106,41 @@ def handle_crud(cheltuieli, undo_list, redo_list):
     return cheltuieli
 
 
+def handle_stergere_nr_apartament(cheltuieli, undo_list, redo_list):
+    try:
+        nr_aprtament = int(input("Indroduceti nr de apartament pe care vreti sa il stergeti: "))
+        cheltuieli = stergere_nr_aprtament(cheltuieli, nr_aprtament, undo_list, redo_list)
+    except ValueError as ve:
+        print('Error', ve)
+    return cheltuieli
+
+
 def handle_adaugare(cheltuieli, undo_list, redo_list):
-    valoare = float(input("Introduceti valoarea pe care vreti sa o adaugati la cheltuieli: "))
-    data = input("introduceti data la care sa se adauge valoarea: ")
-    cheltuieli = adunare_cheltuieli(cheltuieli, valoare, data, undo_list, redo_list)
+    try:
+        valoare = float(input("Introduceti valoarea pe care vreti sa o adaugati la cheltuieli: "))
+        data = input("introduceti data la care sa se adauge valoarea: ")
+        cheltuieli = adunare_cheltuieli(cheltuieli, valoare, data, undo_list, redo_list)
+    except ValueError as ve:
+        print("Error:", ve)
     return cheltuieli
 
 
 def handle_tip(cheltuieli):
     while True:
-        print('1.Cea mai mare suma de tip-ul  "intretinere": ')
-        print('1.Cea mai mare suma de tip-ul  "canal": ')
-        print('1.Cea mai mare suma de tip-ul  "alte cheltuieli" :')
-        optiune = input("Optiunea aleasa: ")
+        print('\n1.Cea mai mare suma de tip-ul  "intretinere": ')
+        print('2.Cea mai mare suma de tip-ul  "canal": ')
+        print('3.Cea mai mare suma de tip-ul  "alte cheltuieli" :')
+        print('b.Back')
+        optiune = input("Alegeti numarul optiunii: ")
         if optiune == '1':
             tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "intretinere")
-            print(tip)
+            print("cea mai mare cheltuiala de tip intretinere este: {0}".format(tip))
         elif optiune == '2':
             tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "canal")
-            print(tip)
+            print("cea mai mare cheltuiala de tip cana; este: {0}".format(tip))
         elif optiune == '3':
             tip = cea_mai_mare_cheltuiala_tip(cheltuieli, "alte cheltuieli")
-            print(tip)
+            print("cea mai mare cheltuiala de tip alte cheltuieli este: {0}".format(tip))
         elif optiune == 'b':
             break
         else:
@@ -164,12 +179,14 @@ def run_ui(cheltuieli, undo_list, redo_list):
         optiune = input('Optiunea aleasa: ')
         if optiune == '1':
             cheltuieli = handle_crud(cheltuieli, undo_list, redo_list)
-        if optiune == '2':
+        elif optiune == '2':
+            cheltuieli = handle_stergere_nr_apartament(cheltuieli, undo_list, redo_list)
+        elif optiune == '3':
             cheltuieli = handle_adaugare(cheltuieli, undo_list, redo_list)
         elif optiune == '4':
             cheltuieli = handle_tip(cheltuieli)
         elif optiune == '5':
-            cheltuieli = handle_ordo(cheltuieli)
+            handle_ordo(cheltuieli)
         elif optiune == '6':
             handle_suma_luni(cheltuieli)
         elif optiune == 'u':

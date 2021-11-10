@@ -14,7 +14,4 @@ def test_ord_chelt_dupa_suma_desc():
     lst = get_data()
     ord_lst = ord_chelt_dupa_suma_desc(lst)
 
-    assert get_suma(ord_lst[2]) > get_suma(ord_lst[1]) > get_suma(ord_lst[0])
-
-
-test_ord_chelt_dupa_suma_desc()
+    assert get_suma(ord_lst[2]) < get_suma(ord_lst[1]) < get_suma(ord_lst[0])
