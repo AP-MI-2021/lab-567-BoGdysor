@@ -79,6 +79,8 @@ def delete(lst_cheltuieli, id_cheltuiei, undo_list: list, redo_list: list):
     Stergerea unei cheltuieli
     :param lst_cheltuieli: lista cu cheltuielile existente
     :param id_cheltuiei: cheltuiala pe care vrem sa o stergem
+    :param undo_list: lista de undo
+    :param redo_list: lista de redo
     :return: new_cheltuieli - boua lista cu cheltuieli dupa stergerea cheltuielii alese
     """
     if read(lst_cheltuieli, id_cheltuiei) is None:

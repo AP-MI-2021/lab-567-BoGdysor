@@ -25,5 +25,3 @@ def test_undo_redo():
     new_lst_cheltuieli = do_redo(undo_list, redo_list, new_lst_cheltuieli)
     assert len(new_lst_cheltuieli) == len(lst_cheltuieli) + 1
     new_lst_cheltuieli = do_undo(undo_list, redo_list, new_lst_cheltuieli)
-
-test_undo_redo()

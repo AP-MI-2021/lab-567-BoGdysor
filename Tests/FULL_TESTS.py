@@ -1,5 +1,6 @@
 from Tests.SORTARE_DESCRESCATOARE import test_ord_chelt_dupa_suma_desc
 from Tests.TEST_ADUNARE_LA_CHELTUIELI import test_adunare_cheltuieli
+from Tests.TEST_CELALALTE_FUNCT_UNDO_REDO import test_stergere_do_redo, test_suma_valoare_luni
 from Tests.TEST_CEL_MAI_MARE_TIP import test_cea_mai_mare_cheltuiala_tip
 from Tests.TEST_CRUD import test_crud
 from Tests.TEST_STERGERE_APARTAMENT import test_stergere_apartament
@@ -17,3 +18,5 @@ def full_tests():
     test_undo_redo()
     test_stergere_apartament()
     test_undo_redo_lab_7()
+    test_stergere_do_redo()
+    test_suma_valoare_luni()

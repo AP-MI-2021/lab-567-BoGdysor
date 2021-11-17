@@ -12,12 +12,12 @@ def handle_add(lst_cheltuieli, param):
     try:
         if len(param) != 6:
             raise ValueError("Numar invalid de parametrii")
-        id_carte = int(param[1])
+        id_cheltuiala = int(param[1])
         nr_apartament = param[2]
         suma = param[3]
         data = param[4]
         tip = param[5]
-        return create(lst_cheltuieli, id_carte, nr_apartament, suma, data, tip, [], [])
+        return create(lst_cheltuieli, id_cheltuiala, nr_apartament, suma, data, tip, [], [])
     except ValueError as ve:
         print("Error", ve)
     return lst_cheltuieli
